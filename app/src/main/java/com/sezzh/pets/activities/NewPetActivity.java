@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.sezzh.pets.R;
+import com.sezzh.pets.io.db.DbConstants;
+import com.sezzh.pets.io.db.PetOpenHelper;
 import com.sezzh.pets.io.models.Pet;
 
 public class NewPetActivity extends AppCompatActivity {
@@ -18,6 +20,7 @@ public class NewPetActivity extends AppCompatActivity {
     private Toolbar mToolbar;
     private EditText mEditTextName;
     private ImageView mImageViewAvatar;
+    private PetOpenHelper dbClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,10 @@ public class NewPetActivity extends AppCompatActivity {
         });
         setSupportActionBar(mToolbar);
         mEditTextName = (EditText) findViewById(R.id.new_pet_name);
+        mImageViewAvatar = (ImageView) findViewById(R.id.new_pet_avatar);
+        dbClient = new PetOpenHelper(
+                this, null, null, DbConstants.DATABASE_VERSION
+        );
     }
 
     @Override
@@ -44,16 +51,18 @@ public class NewPetActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         int itemId = item.getItemId();
-
         if (itemId == R.id.action_save_pet)
             savePet();
+        else if (itemId == R.id.action_upload_image)
+            dbClient.retrivePet(1);
 
         return super.onOptionsItemSelected(item);
     }
 
     private void savePet() {
         Pet pet = new Pet(mEditTextName.getText().toString());
+        dbClient.createPet(pet);
+        this.finish();
     }
 }

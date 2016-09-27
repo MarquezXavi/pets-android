@@ -11,6 +11,7 @@
     tools:showIn="@layout/activity_new_pet">
 
     <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/new_pet_avatar"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
         android:layout_gravity="center"
