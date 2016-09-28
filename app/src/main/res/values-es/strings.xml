@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Pets</string>
+    <string name="action_settings">Configuración</string>
+    <string name="title_activity_main">Tus mascotas</string>
+    <string name="new_pet_name">¿Tu cachorrito se llama?</string>
+</resources>
